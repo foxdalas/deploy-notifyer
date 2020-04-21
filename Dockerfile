@@ -10,6 +10,6 @@ RUN apk add alpine-sdk
 RUN go build .
 
 FROM alpine:3.10
-RUN apk --no-cache add ca-certificates
+RUN apk --no-cache add ca-certificates tzdata
 COPY --from=build /app/deploy-notifyer /bin/
 ENTRYPOINT ["/bin/deploy-notifyer"]
