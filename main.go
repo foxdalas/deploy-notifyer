@@ -45,7 +45,7 @@ func main() {
 	}
 	if len(data.Production.AfterWork) > 0 {
 		loc, _ := time.LoadLocation("Asia/Bangkok")
-		head += fmt.Sprint("\n*Деплои после 20:30 в production:*\n")
+		head += fmt.Sprint("\n*Деплои после 21:00 в production:*\n")
 		for _, deploy := range data.Production.AfterWork {
 			head += fmt.Sprintf("%s %s в дата-центр %s\n", deploy.Timestamp.In(loc).Format(timeHuman), deploy.User, deploy.Datacenter)
 		}

@@ -64,7 +64,7 @@ func (e *elasticSearch) getTotalCount() (int64, error) {
 }
 
 func (e *elasticSearch) afterhoursDeploys() (*elastic.SearchResult, int64, error) {
-	evening := time.Date(e.Yesterday.Year(), e.Yesterday.Month(), e.Yesterday.Day(), 13, 30, 00, 0, time.UTC)
+	evening := time.Date(e.Yesterday.Year(), e.Yesterday.Month(), e.Yesterday.Day(), 14, 00, 00, 0, time.UTC)
 	//morning := time.Date(e.Yesterday.Year(), e.Yesterday.Month(), e.Yesterday.Day(), 5, 30, 00, 0, time.UTC)
 	query := elastic.NewBoolQuery()
 	query = query.MustNot(elastic.NewTermQuery("user.keyword", "Unknown"))
