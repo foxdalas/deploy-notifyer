@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"github.com/davecgh/go-spew/spew"
 	elastic "github.com/olivere/elastic/v7"
 	"net/http"
 	"syscall"
@@ -80,7 +79,6 @@ func (e *elasticSearch) afterhoursDeploys() (*elastic.SearchResult, int64, error
 		Sort("@timestamp", true).
 		Do(e.Ctx)
 
-	spew.Dump(query)
 	total := int64(0)
 	if err == nil {
 		total = searchResult.TotalHits()
@@ -98,20 +96,18 @@ func (e *elasticSearch) beforeDeploys() (*elastic.SearchResult, int64, error) {
 	query = query.Filter(elastic.NewRangeQuery("@timestamp").Gte(start.Format(time.RFC3339)).Lte(morning.Format(time.RFC3339)).TimeZone("UTC"))
 	searchResult, err := e.Client.Search().
 		Index(e.Index+"-"+time.Now().Format(layoutISO)). // search in index
-		Query(query).                                     // specify the query
+		Query(query).                                    // specify the query
 		Size(100).
 		Pretty(true).
 		Sort("@timestamp", true).
 		Do(e.Ctx)
 
-	spew.Dump(query)
 	total := int64(0)
 	if err == nil {
 		total = searchResult.TotalHits()
 	}
 	return searchResult, total, err
 }
-
 
 func (e *elasticSearch) getEnvDeploys(isProduction bool) (*elastic.SearchResult, int64, error) {
 	aggregationName := "user"
