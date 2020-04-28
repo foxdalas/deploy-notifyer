@@ -54,4 +54,5 @@ type Document struct {
 	Apps       []string  `json:"apps"`
 	Production string    `json:"production"`
 	State      string    `json:"state"`
+	Namespace  string    `json:"namespace"`
 }

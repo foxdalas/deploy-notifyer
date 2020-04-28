@@ -32,13 +32,13 @@ func main() {
 	head += fmt.Sprintf("*%d* development\n\n", data.Development.Total)
 
 	if len(data.Production.Users) > 0 {
-		head += fmt.Sprint("*Топ 3 пользователей деплоевших в production:*\n")
+		head += fmt.Sprint("*Топ 3 пользователей деплоивших в production:*\n")
 		for _, user := range data.Production.Users {
 			head += fmt.Sprintf("%s *%d*\n", user.Name, user.Count)
 		}
 	}
 	if len(data.Development.Users) > 0 {
-		head += fmt.Sprint("\n*Топ 3 пользователей деплоевших в development:*\n")
+		head += fmt.Sprint("\n*Топ 3 пользователей деплоивших в development:*\n")
 		for _, user := range data.Development.Users {
 			head += fmt.Sprintf("%s *%d*\n", user.Name, user.Count)
 		}
@@ -47,7 +47,7 @@ func main() {
 		loc, _ := time.LoadLocation("Asia/Bangkok")
 		head += fmt.Sprint("\n*Деплои после 21:00 в production:*\n")
 		for _, deploy := range data.Production.AfterWork {
-			head += fmt.Sprintf("%s %s в дата-центр %s\n", deploy.Timestamp.In(loc).Format(timeHuman), deploy.User, deploy.Datacenter)
+			head += fmt.Sprintf("%s %s в дата-центр *%s* проект *%s*	\n", deploy.Timestamp.In(loc).Format(timeHuman), deploy.User, deploy.Datacenter, deploy.Namespace)
 		}
 	}
 	payload := make(map[string]interface{})
