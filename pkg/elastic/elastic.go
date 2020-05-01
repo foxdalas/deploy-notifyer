@@ -164,7 +164,10 @@ func (e *elasticSearch) GetDeploys(ctx context.Context, elasticClient *elastic.C
 
 	}
 
-	search, _, _ = e.beforeDeploys()
+	search, _, err = e.beforeDeploys()
+	if err != nil {
+		return stats, err
+	}
 	for _, t := range search.Hits.Hits {
 		var doc Document
 		err := json.Unmarshal(t.Source, &doc)
