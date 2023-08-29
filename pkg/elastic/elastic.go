@@ -240,6 +240,7 @@ func (e *elasticSearch) searchResults(query *elastic.BoolQuery, aggregationStrin
 		Size(0).
 		Aggregation(aggregationName, aggregationString).
 		Pretty(true).
+		AllowNoIndices(true).
 		Do(e.Ctx)
 	count, err := e.Client.Count(e.Index + "-" + e.Yesterday.Format(layoutISO)).Query(query).Do(e.Ctx)
 	return searchResult, count, err
