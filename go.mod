@@ -7,6 +7,6 @@ require (
 	github.com/olivere/elastic/v7 v7.0.32
 	github.com/parnurzeal/gorequest v0.2.16
 	github.com/smartystreets/goconvey v1.6.4 // indirect
-	golang.org/x/net v0.0.0-20220127200216-cd36cc0744dd
+	golang.org/x/net v0.15.0
 	moul.io/http2curl v1.0.0 // indirect
 )
