@@ -77,6 +77,7 @@ func (e *elasticSearch) afterhoursDeploys() (*elastic.SearchResult, int64, error
 		Size(100).
 		Pretty(true).
 		Sort("@timestamp", true).
+		IgnoreUnavailable(true).
 		Do(e.Ctx)
 
 	total := int64(0)
@@ -100,6 +101,7 @@ func (e *elasticSearch) beforeDeploys() (*elastic.SearchResult, int64, error) {
 		Size(100).
 		Pretty(true).
 		Sort("@timestamp", true).
+		IgnoreUnavailable(true).
 		Do(e.Ctx)
 
 	total := int64(0)
@@ -241,6 +243,7 @@ func (e *elasticSearch) searchResults(query *elastic.BoolQuery, aggregationStrin
 		Aggregation(aggregationName, aggregationString).
 		Pretty(true).
 		AllowNoIndices(true).
+		IgnoreUnavailable(true).
 		Do(e.Ctx)
 	count, err := e.Client.Count(e.Index + "-" + e.Yesterday.Format(layoutISO)).Query(query).Do(e.Ctx)
 	return searchResult, count, err
